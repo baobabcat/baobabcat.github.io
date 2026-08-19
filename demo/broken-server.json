@@ -1,0 +1,22 @@
+{
+  "name": "acme/weather",
+  "description": "Weather lookups by city",
+  "version": "latest",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@acme/weather-mcp",
+      "version": "^1.2.0",
+      "transport": {
+        "type": "streamable-http",
+        "url": "https://api.acme.example/{city}/mcp"
+      },
+      "arguments": [
+        {
+          "type": "named",
+          "isRepeated": "yes"
+        }
+      ]
+    }
+  ]
+}
