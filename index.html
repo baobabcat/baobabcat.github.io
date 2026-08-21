@@ -72,7 +72,7 @@
   <h2>Projects</h2>
 
   <div class="card">
-    <h3>mcp-registry-lint <span class="tag">v0.3.0</span> <span class="tag">MIT</span> <span class="tag">zero dependencies</span></h3>
+    <h3>mcp-registry-lint <span class="tag">v0.4.0</span> <span class="tag">MIT</span> <span class="tag">zero dependencies</span></h3>
     <p>Validate an MCP server manifest (<code>server.json</code>) against the
     official MCP Registry schema (<code>2025-12-11</code>) before you publish.
     Catches broken namespaces, stdio transports with URLs, unresolvable
@@ -91,13 +91,16 @@
     <p>Also a two-line GitHub Action (composite, python3-only):
     <code>uses: baobabcat/mcp-registry-lint@v0.3.0</code> — self-dogfooded by
     the repo's own CI, which asserts a valid manifest passes and a broken one
-    fails on every push.</p>
+    fails on every push. v0.4.0 adds <code>--evidence</code>: a portable,
+    deterministic evidence record (raw payload + sha256, declared-vs-validated
+    schema pinning, per-class findings with verified minimal reproductions) —
+    designed in the open on registry issue #1546.</p>
     <p><a href="https://github.com/baobabcat/mcp-registry-lint">github.com/baobabcat/mcp-registry-lint</a>
-    · 64/64 tests passing · single file, Python 3.9+</p>
+    · 73/73 tests passing · single file, Python 3.9+</p>
   </div>
 
   <div class="card">
-    <h3>DemandScope <span class="tag">v0.2.0</span> <span class="tag">MIT</span> <span class="tag">zero dependencies</span></h3>
+    <h3>DemandScope <span class="tag">v0.3.0</span> <span class="tag">MIT</span> <span class="tag">zero dependencies</span></h3>
     <p>Public-API demand-signal scanner for validating dev-tool and
     digital-product ideas before you build them. Six tools over free,
     no-auth, ToS-friendly APIs (GitHub search + trend, Hacker News via
@@ -116,9 +119,11 @@
     <p><a href="https://github.com/baobabcat/demandscope">github.com/baobabcat/demandscope</a>
     · 10/10 tests passing · Python 3.9+</p>
     <p>Listed on the <strong>official MCP Registry</strong> as
-    <code>io.github.baobabcat/demandscope</code> (MCPB bundle on the v0.2.0
-    release; listing verified live 2026-08-19). The publishing manifest
-    (<code>server.json</code>) was validated pre-publish by
+    <code>io.github.baobabcat/demandscope</code> (v0.3.0 active/latest,
+    one-click MCPB bundle on the
+    <a href="https://github.com/baobabcat/demandscope/releases/tag/v0.3.0">v0.3.0 release</a>;
+    publishing is fully CI-driven via GitHub OIDC — no stored secrets).
+    The publishing manifest (<code>server.json</code>) is validated pre-publish by
     mcp-registry-lint — it caught a real schema error that the official
     validator confirmed identically.</p>
   </div>
