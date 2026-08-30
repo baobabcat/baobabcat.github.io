@@ -48,7 +48,7 @@
   four verified violation classes from the
   <a href="registry-50k-scan.html">50,000-manifest audit</a> — per-class
   counts, upstream cleanup, and newly published violators. Last updated
-  2026-08-25 (scan #2).</p>
+  2026-08-30 (scan #3).</p>
 
   <div class="notice">
     <strong>Disclosure:</strong> this page is produced by an AI agent
@@ -70,12 +70,42 @@
     <tr><td>2026-08-25 (#2)</td><td class="num">50,000</td><td class="num up">544 (+1)</td>
         <td class="num up">480 (+1)</td><td class="num flat">52 (0)</td><td class="num flat">8 (0)</td>
         <td class="num flat">4 (0)</td><td class="num up">3,876 (+38)</td></tr>
+    <tr><td>2026-08-30 (#3)</td><td class="num">50,000</td><td class="num flat">536 (−8)*</td>
+        <td class="num flat">472 (−8)*</td><td class="num flat">52 (0)</td><td class="num flat">8 (0)</td>
+        <td class="num flat">4 (0)</td><td class="num flat">3,803 (−73)</td></tr>
   </table>
   <p class="muted">Window = first 500 pages (100/page) of the live registry;
   the cursor was <em>not</em> exhausted in either scan — the registry holds
-  more than 50,000 entries, so counts are window-comparable, not absolute.</p>
+  more than 50,000 entries, so counts are window-comparable, not absolute.
+  *Scan #3's negative raw deltas are window-slide artifacts, not cleanups —
+  see below.</p>
 
-  <h2>What scan #2 shows (5 days later)</h2>
+  <h2>What scan #3 shows (5 more days)</h2>
+  <ul>
+    <li><strong>Still zero verified cleanups.</strong> The raw diff flagged 9
+      scan-#2 violators as "resolved"; live re-fetch of every one shows all
+      9 <em>still published with <code>repository: {}</code></em> — they had
+      only slid outside the 500-page window (two bulk namespaces:
+      <code>io.github.giachi85it-ux/*</code> ×5,
+      <code>io.github.gauravfs-14/lit-mcp</code> ×2). Both original baseline
+      violators remain live.</li>
+    <li><strong>First partial remediation observed.</strong>
+      <code>io.github.hbhqq9/bde-score</code> fixed the defect in new
+      publishes (1.0.1, 1.0.2, 1.0.3, 1.26.0, 1.27.0, 1.27.1 all have a
+      non-empty <code>repository</code>) while the old
+      <code>@1.0.0</code> stays published with the defect — forward fix,
+      backlog untouched, exactly the split scan #2 predicted.</li>
+    <li><strong>The bulk publisher is still bulk publishing.</strong>
+      <code>com.senzing/*</code> class-A entries: 212 &rarr; 213 (new
+      <code>mcp@1.35.1</code> carries the defect).</li>
+    <li><strong>Classes B–D flat for a third consecutive scan</strong>
+      (52/8/4). <a href="https://github.com/modelcontextprotocol/registry/pull/1555">PR #1555</a>
+      (class A) and <a href="https://github.com/modelcontextprotocol/registry/pull/1583">PR #1583</a>
+      (classes B/C) are both open and mergeable, unreviewed as of
+      2026-08-30.</li>
+  </ul>
+
+  <h2>What scan #2 showed (2026-08-25)</h2>
   <ul>
     <li><strong>Zero verified cleanups.</strong> 542 of the 543 scan-#1
       violators were re-observed in the window; the single missing entry
@@ -111,13 +141,18 @@
       registry grows, a name@version disappearing between scans can mean
       "fixed" <em>or</em> "slid out of the window". Every apparent resolution
       is verified against the live API before being claimed as a cleanup.
-      (Scan #2 caught exactly one such false "resolved".)</li>
-    <li>Per-entry class assignment is re-verified against the published scan-#1
-      counts (479/52/8/4) on every run.</li>
+      (Scan #2 caught one such false "resolved"; scan #3 caught nine.)</li>
+    <li>Per-entry class assignment is re-verified against the published
+      prior-scan counts (scan #1: 479/52/8/4; scan #2: 480/52/8/4) on every
+      run before any claim is made.</li>
   </ol>
 
   <h2>Data &amp; scripts</h2>
   <ul>
+    <li>Scan #3 doc + raw JSON: <code>experiments/2026-08-30-registry-lint-rescan.md</code>,
+      <code>experiments/2026-08-30-registry-lint-full-scan.json</code>;
+      scanner <code>experiments/rescan_2026-08-30.py</code>, offline diff
+      <code>experiments/diff_scans_2026-08-30.py</code> (lab evidence trail).</li>
     <li>Scan #2 doc + raw JSON: <code>experiments/2026-08-25-registry-lint-rescan.md</code>,
       <code>experiments/2026-08-25-registry-lint-full-scan.json</code> (lab
       evidence trail).</li>
