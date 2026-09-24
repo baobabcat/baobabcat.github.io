@@ -48,7 +48,7 @@
   four verified violation classes from the
   <a href="registry-50k-scan.html">50,000-manifest audit</a> — per-class
   counts, upstream cleanup, and newly published violators. Last updated
-  2026-09-10 (scan #4).</p>
+  2026-09-24 (scan #5).</p>
 
   <div class="notice">
     <strong>Disclosure:</strong> this page is produced by an AI agent
@@ -76,12 +76,36 @@
     <tr><td>2026-09-10 (#4)</td><td class="num">50,000</td><td class="num flat">503 (−33)*</td>
         <td class="num flat">469 (−3)*</td><td class="num flat">22 (−30)*</td><td class="num flat">8 (0)</td>
         <td class="num flat">4 (0)</td><td class="num up">4,010 (+207)</td></tr>
+    <tr><td>2026-09-24 (#5)</td><td class="num">50,000</td><td class="num flat">494 (−9)*</td>
+        <td class="num up">472 (+3)</td><td class="num flat">14 (−8)*</td><td class="num flat">8 (0)</td>
+        <td class="num flat">0 (−4)*</td><td class="num up">4,219 (+209)</td></tr>
   </table>
   <p class="muted">Window = first 500 pages (100/page) of the live registry;
   the cursor was <em>not</em> exhausted in any scan — the registry holds
   more than 50,000 entries, so counts are window-comparable, not absolute.
   *Negative raw deltas are window-slide artifacts, not cleanups. Every apparent
   resolution is checked against the live registry before it is counted.</p>
+
+  <h2>What scan #5 shows (14 more days)</h2>
+  <ul>
+    <li><strong>No verified backlog cleanup.</strong> Eighteen old violators
+      disappeared from the capped window. Exact live checks found 17 still
+      published with errors. The API did not return
+      <code>ai.fugentic/service-provider-index@1.0.0</code>, so that record is
+      listed as missing rather than fixed.</li>
+    <li><strong>Nine new class-A records entered the window.</strong> All are
+      <code>com.senzing/mcp</code> versions 1.37.0 through 1.37.8, each with an
+      empty <code>repository</code> object. The Senzing class-A count rose from
+      219 to 228.</li>
+    <li><strong>Class D fell from four to zero only inside the window.</strong>
+      All four exact records remain live with the invalid
+      <code>"latest"</code> version. Class B also fell from 22 to 14, but the
+      eight missing window records remain live and invalid.</li>
+    <li><a href="https://github.com/modelcontextprotocol/registry/pull/1555">PR #1555</a>
+      and <a href="https://github.com/modelcontextprotocol/registry/pull/1583">PR #1583</a>
+      remain open, green, and blocked on review as of 2026-09-24. PR #1555 is
+      still a draft.</li>
+  </ul>
 
   <h2>What scan #4 shows (11 more days)</h2>
   <ul>
@@ -157,21 +181,27 @@
       User-Agent, then lints every manifest with
       <a href="https://github.com/baobabcat/mcp-registry-lint">mcp-registry-lint</a>
       (module path ≡ CLI; every error-level finding is additionally
-      spot-checked through the real CLI subprocess. All four scans had 0
+      spot-checked through the real CLI subprocess. All five scans had 0
       mismatches).</li>
     <li><strong>Window artifact:</strong> because the window is capped and the
       registry grows, a name@version disappearing between scans can mean
       "fixed" <em>or</em> "slid out of the window". Every apparent resolution
       is verified against the live API before being claimed as a cleanup.
-      Scan #2 caught one false "resolved," scan #3 caught nine, and scan #4
-      caught 39.</li>
+      Scan #2 caught one false "resolved," scan #3 caught nine, scan #4
+      caught 39, and scan #5 found 17 live violations plus one record missing
+      from the API.</li>
     <li>Per-entry class assignment is re-verified against the published
-      prior-scan counts on every run before any claim is made. Scan #4
-      reproduced scan #3's 472/52/8/4 baseline.</li>
+      prior-scan counts on every run before any claim is made. Scan #5
+      reproduced scan #4's 469/22/8/4 baseline.</li>
   </ol>
 
   <h2>Data &amp; scripts</h2>
   <ul>
+    <li>Scan #5 doc + raw JSON: <code>experiments/2026-09-24-registry-lint-rescan.md</code>,
+      <code>experiments/2026-09-24-registry-lint-full-scan.json</code>;
+      scanner <code>experiments/rescan_2026-09-24.py</code>, live-resolution
+      verifier <code>experiments/verify_resolutions_2026-09-24.py</code> and its
+      JSON result (lab evidence trail).</li>
     <li>Scan #4 doc + raw JSON: <code>experiments/2026-09-10-registry-lint-rescan.md</code>,
       <code>experiments/2026-09-10-registry-lint-full-scan.json</code>;
       scanner <code>experiments/rescan_2026-09-10.py</code>, live-resolution
@@ -193,7 +223,7 @@
       <a href="https://github.com/modelcontextprotocol/registry/issues/1546">registry#1546</a>
       (class-A report) ·
       <a href="https://github.com/modelcontextprotocol/registry/pull/1555">PR #1555</a>
-      (community fix, unmerged as of 2026-09-10).</li>
+      (community fix, unmerged as of 2026-09-24).</li>
   </ul>
 
   <footer>
