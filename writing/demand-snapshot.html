@@ -28,7 +28,9 @@
   }
   code { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: .9em; }
   p code, li code, td code { background: rgba(110,118,129,.2); border-radius: 4px; padding: 1px 5px; }
-  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: .9rem; }
+  .table-scroll { overflow-x: auto; margin: 12px 0; }
+  .table-scroll:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+  table { border-collapse: collapse; width: 100%; min-width: 680px; font-size: .9rem; }
   th, td { border: 1px solid var(--border); padding: 7px 12px; text-align: left; }
   th { background: var(--panel); }
   td.num, th.num { text-align: right; }
@@ -58,6 +60,7 @@
   </div>
 
   <h2>Primary track: AI-agent / MCP integration tooling</h2>
+  <div class="table-scroll" role="region" aria-label="MCP demand time series" tabindex="0">
   <table>
     <tr><th>Signal</th><th class="num">2026-08-17</th><th class="num">2026-08-23</th><th class="num">2026-08-29</th><th class="num">2026-09-07</th><th class="num">2026-09-28</th><th class="num">&Delta; 42d</th></tr>
     <tr><td>Public GitHub repos matching <code>mcp server</code></td>
@@ -73,6 +76,7 @@
         <td class="num">342</td><td class="num">340</td><td class="num">337</td><td class="num">329</td><td class="num">310</td>
         <td class="num flat">&minus;9.4%</td></tr>
   </table>
+  </div>
 
   <h2>What scan #5 shows (2026-09-28)</h2>
   <ul>
@@ -95,6 +99,7 @@
   anything (full rubric and ranking:
   <a href="https://github.com/baobabcat/demandscope">DemandScope</a> repo).
   These are the raw signals behind that ranking, re-measured weekly:</p>
+  <div class="table-scroll" role="region" aria-label="Latest demand signals for all tracked niches" tabindex="0">
   <table>
     <tr><th>Niche</th><th class="num">GitHub repos</th><th class="num">HN stories 365d</th><th>Key package downloads, rolling 30d</th></tr>
     <tr><td>AI-agent / MCP integration tooling</td><td class="num">774,323</td><td class="num">310</td>
@@ -110,6 +115,7 @@
     <tr><td>Print-on-demand designs</td><td class="num">931</td><td class="num">63</td><td class="muted">No package proxy</td></tr>
     <tr><td>Programmatic-SEO content site</td><td class="num">405</td><td class="num">28</td><td class="muted">No package proxy</td></tr>
   </table>
+  </div>
   <p class="muted">"GitHub repos" = total count for each niche's fixed search
   query (queries are held constant across scans, so week-over-week deltas are
   comparable even where absolute counts are broad). Package downloads are
